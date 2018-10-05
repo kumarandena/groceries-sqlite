@@ -1,0 +1,27 @@
+<ActionBar title="Groceries">
+		<ActionItem ios.position="right">
+			<Label text="Logout" (tap)="logout()" paddingright="20" color="red"></Label>
+		</ActionItem>
+</ActionBar>
+
+<GridLayout rows="auto, *"> 
+	<GridLayout row="0" columns="*, auto" class="add-bar">
+		<TextField #groceryTextField [(ngModel)]="grocery" hint="Enter a grocery item" col="0"></TextField>
+		<Image src="~/images/add.png" (tap)="add()" col="1"></Image>
+	</GridLayout>
+
+<RadListView row="1" [items]="groceryList" swipeActions="true" (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+
+	<ng-template let-item="item" let-i="index">
+		<Label [text]="item.name" class="p-15"></Label>
+	</ng-template>
+
+	<GridLayout *tkListItemSwipeTemplate columns="*, auto">
+		<StackLayout id="delete-view" col="1" (tap)="delete($event)" class="delete-view">
+			<Image src="~/images/delete.png"></Image>
+		</StackLayout>
+	</GridLayout>
+
+</RadListView>
+
+</GridLayout>
